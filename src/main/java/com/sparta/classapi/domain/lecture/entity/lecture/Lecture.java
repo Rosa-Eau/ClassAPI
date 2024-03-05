@@ -8,7 +8,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,7 +49,7 @@ public class Lecture {
     private Tutor tutor;
 
     @OneToMany(mappedBy = "lecture", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Set<Comment> commentList = new HashSet<>();
+    private List<Comment> commentList = new ArrayList<>();
 
 //    public void update(LectureRequestDto requestDto, Tutor tutor, Category category) {
 //        this.name = requestDto.getName();
