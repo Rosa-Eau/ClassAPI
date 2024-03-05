@@ -29,16 +29,17 @@ public class SignupRequestDto {
     private String auth;
 
     private boolean admin = false;
+
     private String adminToken = "";
 
-    public User toEntity(String encodedPassword, UserRoleEnum role) {
+    public User toEntity(String encodedPassword, UserRoleEnum auth) {
         return User.builder()
                 .email(email)
                 .password(encodedPassword)
                 .gender(gender)
                 .phoneNumber(phoneNumber)
                 .address(address)
-                .auth(role)
+                .auth(auth)
                 .build();
     }
 

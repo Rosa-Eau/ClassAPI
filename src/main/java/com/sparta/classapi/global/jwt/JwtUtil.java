@@ -29,7 +29,7 @@ import java.util.Date;
         // Token 식별자 (Token 앞에 붙이는데 구별하기 위해 뒤에 한 칸을 남겨둠)
         public static final String BEARER_PREFIX = "Bearer ";
         // Token 만료시간
-        private final long TOKEN_TIME = 60 * 60 * 24; // 60분
+        private final long TOKEN_TIME = 60 * 60 * 10000L; // 60분
 
         @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey
         private String secretKey;

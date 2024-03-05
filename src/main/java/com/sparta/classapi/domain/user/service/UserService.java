@@ -15,7 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
+    private final String ADMIN_TOKEN = "7870ba8089050930cdd1e2616e842ff76b0880770ad04798dd947226e9ef90234709ff5d64533b36556b31ec8cc001ff17d9be9ac469f03ad10efac8560b40ea";
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -27,19 +27,22 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
 
         // 회원 중복 확인
-        if(userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
+        if(userRepository.existsByEmail(requestDto.getEmail())) {
             throw new IllegalArgumentException("중복된 이메일이 존재합니다.");
         }
 
-        UserRoleEnum role = UserRoleEnum.USER;
+        log.info("admin? : " + requestDto.isAdmin());
+
+        UserRoleEnum auth = UserRoleEnum.USER;
         if (requestDto.isAdmin()) {
+            log.info(requestDto.getAdminToken());
             if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
                 throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
             }
-            role = UserRoleEnum.ADMIN;
+            auth = UserRoleEnum.ADMIN;
         }
 
         // 사용자 등록
-        userRepository.save(requestDto.toEntity(encodedPassword, role));
+        userRepository.save(requestDto.toEntity(encodedPassword, auth));
     }
 }
