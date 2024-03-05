@@ -22,12 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private static final String[] API_WHITE_LIST = {
-            "/api/user/**",
             "/error",
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-resources/**",
-            "swagger-ui.html"
+            "swagger-ui.html",
+            "api/user/**",
     };
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
@@ -70,6 +70,7 @@ public class WebSecurityConfig {
                 authorizeHttpRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers(API_WHITE_LIST).permitAll()
+                        .requestMatchers("api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
