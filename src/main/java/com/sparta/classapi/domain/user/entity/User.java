@@ -34,6 +34,7 @@ public class User {
     private String address;
 
     @Column
+    @Enumerated(value = EnumType.STRING)
     private UserRoleEnum auth;
 
 }
