@@ -2,18 +2,16 @@ package com.sparta.classapi.domain.user.controller;
 
 import com.sparta.classapi.domain.user.dto.SignupRequestDto;
 import com.sparta.classapi.domain.user.service.UserService;
+import com.sparta.classapi.global.handler.ValidHelper;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -28,12 +26,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDto requestDto, BindingResult bindingResult) {
-        // Validation 예외처리
-        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        if(!fieldErrors.isEmpty()) {
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
-            }
+
+        if(ValidHelper.validHelper(bindingResult) != null){
+            return ValidHelper.validHelper(bindingResult);
         }
 
         try {
