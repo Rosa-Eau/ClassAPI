@@ -1,15 +1,11 @@
 package com.sparta.classapi.domain.lecture.entity.comment;
 
 
-import com.sparta.classapi.domain.admin.entity.Tutor;
+import com.sparta.classapi.domain.lecture.dto.comment.CommentUpdateRequestDto;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
 import com.sparta.classapi.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comment")
@@ -17,8 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@EntityListeners(AuditingEntityListener.class)
-public class Comment {
+public class Comment extends Timestamped{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +30,7 @@ public class Comment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(updatable = false)
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime registeredAt;
+    public void update(CommentUpdateRequestDto requestDto) {
+          this.content = requestDto.getContent();
+    }
 }
