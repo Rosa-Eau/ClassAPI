@@ -1,6 +1,8 @@
 package com.sparta.classapi.domain.lecture.dto.lecture;
 
+import com.sparta.classapi.domain.admin.dto.TutorToLectureResponseDto;
 import com.sparta.classapi.domain.admin.entity.Tutor;
+import com.sparta.classapi.domain.lecture.dto.comment.CommentToLectureResponseDto;
 import com.sparta.classapi.domain.lecture.entity.comment.Comment;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
 import lombok.AllArgsConstructor;
@@ -27,17 +29,23 @@ public class LectureResponseDto {
 
     private LocalDateTime registeredAt;
 
-    private Tutor tutor;
+    private TutorToLectureResponseDto tutor;
 
-    private List<Comment> commentList = new ArrayList<>();
+    private List<CommentToLectureResponseDto> commentList = new ArrayList<>();
 
-    public LectureResponseDto(Lecture lecture) {
+    private int likes;
+
+    public LectureResponseDto(Lecture lecture,
+                              int likes,
+                              TutorToLectureResponseDto tutor,
+                              List<CommentToLectureResponseDto> comments) {
         this.name = lecture.getName();
+        this.likes = likes;
         this.cost = lecture.getCost();
         this.description = lecture.getDescription();
         this.category = lecture.getCategory().getCategory();
         this.registeredAt = lecture.getRegisteredAt();
-        this.tutor = lecture.getTutor();
-        this.commentList = lecture.getCommentList();
+        this.tutor = tutor;
+        this.commentList = comments;
     }
 }

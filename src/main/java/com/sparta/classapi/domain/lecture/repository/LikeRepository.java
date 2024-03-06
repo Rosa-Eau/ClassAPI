@@ -8,4 +8,6 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
     boolean existsByLectureId(Long lectureId);
 
     void deleteByLectureId(Long lectureId);
+
+    int countByLectureId(Long lectureId);
 }

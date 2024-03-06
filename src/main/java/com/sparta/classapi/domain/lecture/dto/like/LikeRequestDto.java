@@ -10,11 +10,4 @@ public class LikeRequestDto {
 
     private Long lectureId;
 
-//    public Like toEntity(User user, Lecture lecture) {
-//        return Like.builder()
-//                .user(user)
-//                .lecture(lecture)
-//                .build();
-//    }
-
 }

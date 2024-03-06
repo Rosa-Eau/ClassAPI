@@ -5,6 +5,7 @@ import com.sparta.classapi.domain.admin.dto.TutorRequestDto;
 import com.sparta.classapi.domain.admin.dto.TutorResponseDto;
 import com.sparta.classapi.domain.admin.entity.Tutor;
 import com.sparta.classapi.domain.admin.repository.TutorRepostory;
+import com.sparta.classapi.domain.lecture.dto.lecture.LectureCreateResponseDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureRequestDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureResponseDto;
 import com.sparta.classapi.domain.lecture.entity.lecture.Category;
@@ -33,7 +34,7 @@ public class AdminService {
     }
 
     @Transactional
-    public LectureResponseDto registerLecture(LectureRequestDto requestDto) {
+    public LectureCreateResponseDto registerLecture(LectureRequestDto requestDto) {
 
         Category category = Category.valueOf(requestDto.getCategory());
 
@@ -41,7 +42,7 @@ public class AdminService {
 
         Lecture lecture = lectureRepository.save(requestDto.toEntity(tutor, category));
 
-        return new LectureResponseDto(lecture);
+        return new LectureCreateResponseDto(lecture);
     }
 
 }
