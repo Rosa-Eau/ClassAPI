@@ -21,8 +21,6 @@ import java.util.Set;
 public class LectureResponseDto {
     private String name;
 
-    private int likes;
-
     private int cost;
 
     private String description;
@@ -34,6 +32,8 @@ public class LectureResponseDto {
     private TutorToLectureResponseDto tutor;
 
     private List<CommentToLectureResponseDto> commentList = new ArrayList<>();
+
+    private int likes;
 
     public LectureResponseDto(Lecture lecture,
                               int likes,
