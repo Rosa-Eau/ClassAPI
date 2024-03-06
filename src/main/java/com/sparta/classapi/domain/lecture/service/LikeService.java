@@ -33,8 +33,8 @@ public class LikeService {
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
 
-        if (likeRepository.existsByLectureId(lectureId)) {
-            likeRepository.deleteByLectureId(lectureId);
+        if (likeRepository.existsByLectureIdAndUserId(lectureId, user.getId())) {
+            likeRepository.deleteByLectureIdAndUserId(lectureId, user.getId());
             return "좋아요를 취소하였습니다.";
         }
 
