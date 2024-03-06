@@ -27,7 +27,8 @@ public class WebSecurityConfig {
             "/swagger-ui/**",
             "/swagger-resources/**",
             "swagger-ui.html",
-            "api/signup"
+            "api/signup",
+            "api/lecture/**"
     };
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;

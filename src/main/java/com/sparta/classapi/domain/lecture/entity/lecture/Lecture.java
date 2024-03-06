@@ -9,9 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "lecture")
@@ -50,12 +48,4 @@ public class Lecture {
 
     @OneToMany(mappedBy = "lecture", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Comment> commentList = new ArrayList<>();
-
-//    public void update(LectureRequestDto requestDto, Tutor tutor, Category category) {
-//        this.name = requestDto.getName();
-//        this.cost = requestDto.getCost();
-//        this.description = requestDto.getDescription();
-//        this.category = category;
-//        this.tutor = tutor;
-//    }
 }
