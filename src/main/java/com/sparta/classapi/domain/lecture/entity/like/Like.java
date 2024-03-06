@@ -22,7 +22,4 @@ public class Like {
 
     @ManyToOne
     private Lecture lecture;
-
-    @Column
-    private boolean likeStatus;
 }
