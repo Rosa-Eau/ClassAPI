@@ -22,11 +22,13 @@ public class LectureService {
     private final LectureRepository lectureRepository;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
+    private final Search search;
 
-    public LectureService(LectureRepository lectureRepository, CommentRepository commentRepository, LikeRepository likeRepository) {
+    public LectureService(LectureRepository lectureRepository, CommentRepository commentRepository, LikeRepository likeRepository, Search search) {
         this.lectureRepository = lectureRepository;
         this.commentRepository = commentRepository;
         this.likeRepository = likeRepository;
+        this.search = search;
     }
 
     @Transactional(readOnly = true)
@@ -50,40 +52,15 @@ public class LectureService {
         Category categoryEnum = Category.valueOf(category);
 
         if (sort.equals("desc")) {
-            if (select.equals("name")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByNameDesc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
-
-            if (select.equals("cost")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByCostDesc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
-
-            if (select.equals("registeredAt")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByRegisteredAtDesc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
-
+            return search.desc(categoryEnum, select);
         }
 
         if (sort.equals("asc")) {
-            if (select.equals("name")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByNameAsc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
-
-            if (select.equals("cost")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByCostAsc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
-
-            if (select.equals("registeredAt")) {
-                List<Lecture> lectures = lectureRepository.findByCategoryOrderByRegisteredAtAsc(categoryEnum);
-                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
-            }
+            return search.asc(categoryEnum, select);
         }
 
-        throw new IllegalArgumentException("선택사항이 잘못되었습니다.");
+        throw new IllegalArgumentException("정렬 선택이 잘못되었습니다.");
+
     }
+
 }
