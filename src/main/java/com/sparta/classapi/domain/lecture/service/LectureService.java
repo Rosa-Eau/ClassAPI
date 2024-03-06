@@ -1,5 +1,6 @@
 package com.sparta.classapi.domain.lecture.service;
 
+import com.sparta.classapi.domain.lecture.dto.lecture.LectureListResponseDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureResponseDto;
 import com.sparta.classapi.domain.lecture.entity.lecture.Category;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
@@ -29,7 +30,7 @@ public class LectureService {
 
 
     @Transactional(readOnly = true)
-    public List<LectureResponseDto> readLectureList(String category, String select, String sort) {
+    public List<LectureListResponseDto> readLectureList(String category, String select, String sort) {
 
         Category categoryEnum = Category.valueOf(category);
 
@@ -37,17 +38,17 @@ public class LectureService {
         if (sort.equals("desc")) {
             if (select.equals("name")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByNameDesc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
 
             if (select.equals("cost")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByCostDesc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
 
             if (select.equals("registeredAt")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByRegisteredAtDesc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
 
         }
@@ -55,17 +56,17 @@ public class LectureService {
         if (sort.equals("asc")) {
             if (select.equals("name")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByNameAsc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
 
             if (select.equals("cost")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByCostAsc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
 
             if (select.equals("registeredAt")) {
                 List<Lecture> lectures = lectureRepository.findByCategoryOrderByRegisteredAtAsc(categoryEnum);
-                return lectures.stream().map(LectureResponseDto::new).collect(Collectors.toList());
+                return lectures.stream().map(LectureListResponseDto::new).collect(Collectors.toList());
             }
         }
 

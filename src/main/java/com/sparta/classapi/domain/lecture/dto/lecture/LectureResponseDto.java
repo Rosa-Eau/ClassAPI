@@ -1,5 +1,6 @@
 package com.sparta.classapi.domain.lecture.dto.lecture;
 
+import com.sparta.classapi.domain.admin.entity.Tutor;
 import com.sparta.classapi.domain.lecture.entity.comment.Comment;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class LectureResponseDto {
 
     private LocalDateTime registeredAt;
 
-    private Long tutorId;
+    private Tutor tutor;
 
     private List<Comment> commentList = new ArrayList<>();
 
@@ -36,7 +37,7 @@ public class LectureResponseDto {
         this.description = lecture.getDescription();
         this.category = lecture.getCategory().getCategory();
         this.registeredAt = lecture.getRegisteredAt();
-        this.tutorId = lecture.getTutor().getId();
+        this.tutor = lecture.getTutor();
         this.commentList = lecture.getCommentList();
     }
 }
