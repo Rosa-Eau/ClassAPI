@@ -49,14 +49,8 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CustomValidationException.class)
-    public ResponseEntity<RestApiException> handleValidationApiException(CustomValidationException ex) {
-        RestApiException restApiException = new RestApiException(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
-        return new ResponseEntity<>(
-                //HTTP body
-                restApiException,
-                // HTTP status code
-                HttpStatus.BAD_REQUEST
-                );
+    public ValidResponseDto<?> handleValidationApiException(CustomValidationException e) {
+        return ValidResponseDto.fail(e.getMessage(), e.getErrorMap());
     }
 
 
