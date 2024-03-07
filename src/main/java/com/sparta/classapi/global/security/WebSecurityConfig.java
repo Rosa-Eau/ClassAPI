@@ -1,12 +1,13 @@
 package com.sparta.classapi.global.security;
 
-import com.sparta.classapi.global.jwt.JwtAuthenticationFilter;
-import com.sparta.classapi.global.jwt.JwtAuthorizationFilter;
-import com.sparta.classapi.global.jwt.JwtUtil;
+import com.sparta.classapi.global.handler.jwt.JwtAuthenticationFilter;
+import com.sparta.classapi.global.handler.jwt.JwtAuthorizationFilter;
+import com.sparta.classapi.global.handler.jwt.JwtUtil;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -61,6 +62,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // CSRF 설정
         http.csrf(AbstractHttpConfigurer::disable);
+
+        http.cors(Customizer.withDefaults());
 
         // 기본 설정인 Session 방식은 사용하지 않고 JWT 방식을 사용하기 위한 설정
         http.sessionManagement((sessionManagement) ->

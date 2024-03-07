@@ -22,10 +22,9 @@ public class LikeController {
     }
 
     @PostMapping("/{lectureId}")
-    public ResponseEntity<?> addLike(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable Long lectureId) {
+    public String addLike(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable Long lectureId) {
         String email = user.getUsername();
-        log.info("email : " + email);
-        return ResponseEntity.ok(likeService.addLike(email, lectureId));
+        return likeService.addLike(email, lectureId);
     }
 
 }

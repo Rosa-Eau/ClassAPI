@@ -1,10 +1,15 @@
 package com.sparta.classapi.domain.user.entity;
 
+import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.lecture.entity.like.Like;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,5 +41,11 @@ public class User {
     @Column
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum auth;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Like> likeList = new ArrayList<>();
 
 }

@@ -2,7 +2,9 @@ package com.sparta.classapi.domain.admin.controller;
 
 
 import com.sparta.classapi.domain.admin.dto.TutorRequestDto;
+import com.sparta.classapi.domain.admin.dto.TutorResponseDto;
 import com.sparta.classapi.domain.admin.service.AdminService;
+import com.sparta.classapi.domain.lecture.dto.lecture.LectureCreateResponseDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureRequestDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -26,22 +28,14 @@ public class AdminController {
 
     @Tag(name = "registerTutor", description = "강의 등록")
     @PostMapping("/tutor")
-    public ResponseEntity<?> createTutor(@Valid @RequestBody TutorRequestDto requestDto, BindingResult bindingResult) {
-        try {
-            return ResponseEntity.ok(adminService.registerTutor(requestDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public TutorResponseDto createTutor(@Valid @RequestBody TutorRequestDto requestDto, BindingResult bindingResult) {
+            return adminService.registerTutor(requestDto);
     }
 
     @Tag(name = "registerLecture", description = "강의 등록")
     @PostMapping("/lecture")
-    public ResponseEntity<?> createLecture(@Valid @RequestBody LectureRequestDto requestDto, BindingResult bindingResult) {
-        try {
-            return ResponseEntity.ok(adminService.registerLecture(requestDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public LectureCreateResponseDto createLecture(@Valid @RequestBody LectureRequestDto requestDto, BindingResult bindingResult) {
+            return adminService.registerLecture(requestDto);
     }
 
 }

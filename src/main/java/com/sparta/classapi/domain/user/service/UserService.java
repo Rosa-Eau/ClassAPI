@@ -1,10 +1,13 @@
 package com.sparta.classapi.domain.user.service;
 
+import com.sparta.classapi.domain.user.dto.SignoutRequestDto;
 import com.sparta.classapi.domain.user.dto.SignupRequestDto;
+import com.sparta.classapi.domain.user.entity.User;
 import com.sparta.classapi.domain.user.entity.UserRoleEnum;
 import com.sparta.classapi.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +47,16 @@ public class UserService {
 
         // 사용자 등록
         userRepository.save(requestDto.toEntity(encodedPassword, auth));
+    }
+
+    public void signout(SignoutRequestDto requestDto) {
+        User user = userRepository.findById(requestDto.getId()).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+
+        if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            userRepository.deleteById(requestDto.getId());
+            SecurityContextHolder.clearContext();
+        } else {
+            throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
+        }
     }
 }

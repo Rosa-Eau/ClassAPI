@@ -1,4 +1,4 @@
-package com.sparta.classapi.global.jwt;
+package com.sparta.classapi.global.handler.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.classapi.domain.user.dto.LoginRequestDto;

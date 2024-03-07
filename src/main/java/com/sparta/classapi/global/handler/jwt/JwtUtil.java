@@ -1,4 +1,4 @@
-package com.sparta.classapi.global.jwt;
+package com.sparta.classapi.global.handler.jwt;
 
 import com.sparta.classapi.domain.user.entity.UserRoleEnum;
 import io.jsonwebtoken.*;

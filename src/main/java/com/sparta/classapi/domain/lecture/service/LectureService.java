@@ -34,7 +34,7 @@ public class LectureService {
     @Transactional(readOnly = true)
     public LectureResponseDto readLecture(Long lectureId) {
 
-        Lecture lecture = lectureRepository.findById(lectureId).orElseThrow(() -> new IllegalArgumentException("등록되지 않은 강의입니다."));
+        Lecture lecture = lectureRepository.findById(lectureId).orElseThrow(() -> new NullPointerException("등록되지 않은 강의입니다."));
 
         List<Comment> comments = commentRepository.findByLectureId(lectureId);
 

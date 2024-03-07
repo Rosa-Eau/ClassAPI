@@ -20,48 +20,32 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> leaveComment(@AuthenticationPrincipal UserDetailsImpl user,
-                                          @RequestBody CommentLeaveRequestDto requestDto) {
-
+    public String leaveComment(@AuthenticationPrincipal UserDetailsImpl user,
+                               @RequestBody CommentLeaveRequestDto requestDto) {
         String email = user.getUsername();
-        try {
-            commentService.leaveComment(requestDto, email);
-            return ResponseEntity.ok("댓글이 등록되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-
+        commentService.leaveComment(requestDto, email);
+        return "댓글이 등록되었습니다.";
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<?> updateComment(@AuthenticationPrincipal UserDetailsImpl user,
-                                           @PathVariable Long commentId,
-                                           @RequestBody CommentUpdateRequestDto requestDto) {
+    public String updateComment(@AuthenticationPrincipal UserDetailsImpl user,
+                                @PathVariable Long commentId,
+                                @RequestBody CommentUpdateRequestDto requestDto) {
 
         String email = user.getUsername();
-        try {
-            commentService.updateComment(requestDto, email, commentId);
-            return ResponseEntity.ok("댓글이 수정되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-
+        commentService.updateComment(requestDto, email, commentId);
+        return "댓글이 수정되었습니다.";
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(@AuthenticationPrincipal UserDetailsImpl user,
-                                           @PathVariable Long commentId) {
+    public String deleteComment(@AuthenticationPrincipal UserDetailsImpl user,
+                                @PathVariable Long commentId) {
 
         String email = user.getUsername();
-        try {
-            commentService.deleteComment(commentId, email);
-            return ResponseEntity.ok("댓글이 삭제되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        commentService.deleteComment(commentId, email);
+        return "댓글이 삭제되었습니다.";
 
     }
-
 
 
 }

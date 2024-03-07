@@ -38,7 +38,7 @@ public class AdminService {
 
         Category category = Category.valueOf(requestDto.getCategory());
 
-        Tutor tutor = tutorRepostory.findById(requestDto.getTutorId()).orElseThrow(() -> new IllegalArgumentException("등록되지 않은 강사입니다."));
+        Tutor tutor = tutorRepostory.findById(requestDto.getTutorId()).orElseThrow(() -> new NullPointerException("등록되지 않은 강사입니다."));
 
         Lecture lecture = lectureRepository.save(requestDto.toEntity(tutor, category));
 
