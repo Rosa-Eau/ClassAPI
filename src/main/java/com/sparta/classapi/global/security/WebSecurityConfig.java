@@ -1,5 +1,6 @@
 package com.sparta.classapi.global.security;
 
+import com.sparta.classapi.global.handler.jwt.CustomAuthenticationEntryPoint;
 import com.sparta.classapi.global.handler.jwt.JwtAuthenticationFilter;
 import com.sparta.classapi.global.handler.jwt.JwtAuthorizationFilter;
 import com.sparta.classapi.global.handler.jwt.JwtUtil;
@@ -34,11 +35,13 @@ public class WebSecurityConfig {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
-    public WebSecurityConfig(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, AuthenticationConfiguration authenticationConfiguration) {
+    public WebSecurityConfig(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, AuthenticationConfiguration authenticationConfiguration, CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
         this.authenticationConfiguration = authenticationConfiguration;
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
     }
 
     @Bean
@@ -81,6 +84,7 @@ public class WebSecurityConfig {
         // 필터 관리
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.exceptionHandling(handler -> handler.authenticationEntryPoint(customAuthenticationEntryPoint));
 
         return http.build();
     }
