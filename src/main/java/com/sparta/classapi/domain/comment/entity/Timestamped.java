@@ -1,4 +1,4 @@
-package com.sparta.classapi.domain.lecture.entity.comment;
+package com.sparta.classapi.domain.comment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
