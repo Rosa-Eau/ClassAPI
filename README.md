@@ -2,7 +2,7 @@
 
 ## Use Case Diagram
 
-![ucd](./src/main/resources/static/ClassAPI.drawio.svg)
+![ucd](./src/main/resources/static/ClassAPI.svg)
 
 ---
 
