@@ -1,7 +1,7 @@
 package com.sparta.classapi.domain.lecture.entity.lecture;
 
 import com.sparta.classapi.domain.admin.entity.Tutor;
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

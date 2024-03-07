@@ -1,6 +1,6 @@
-package com.sparta.classapi.domain.lecture.repository;
+package com.sparta.classapi.domain.comment.repository;
 
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

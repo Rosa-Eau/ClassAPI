@@ -1,13 +1,13 @@
 package com.sparta.classapi.domain.lecture.service;
 
 import com.sparta.classapi.domain.admin.dto.TutorToLectureResponseDto;
-import com.sparta.classapi.domain.lecture.dto.comment.CommentToLectureResponseDto;
+import com.sparta.classapi.domain.comment.dto.comment.CommentToLectureResponseDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureListResponseDto;
 import com.sparta.classapi.domain.lecture.dto.lecture.LectureResponseDto;
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import com.sparta.classapi.domain.lecture.entity.lecture.Category;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
-import com.sparta.classapi.domain.lecture.repository.CommentRepository;
+import com.sparta.classapi.domain.comment.repository.CommentRepository;
 import com.sparta.classapi.domain.lecture.repository.LectureRepository;
 import com.sparta.classapi.domain.lecture.repository.LikeRepository;
 import org.springframework.stereotype.Service;

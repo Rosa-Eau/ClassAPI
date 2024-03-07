@@ -1,9 +1,7 @@
 package com.sparta.classapi.domain.lecture.dto.lecture;
 
 import com.sparta.classapi.domain.admin.dto.TutorToLectureResponseDto;
-import com.sparta.classapi.domain.admin.entity.Tutor;
-import com.sparta.classapi.domain.lecture.dto.comment.CommentToLectureResponseDto;
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.dto.comment.CommentToLectureResponseDto;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @AllArgsConstructor

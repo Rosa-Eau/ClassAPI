@@ -1,11 +1,9 @@
-package com.sparta.classapi.domain.lecture.controller;
+package com.sparta.classapi.domain.comment.controller;
 
-import com.sparta.classapi.domain.lecture.dto.comment.CommentLeaveRequestDto;
-import com.sparta.classapi.domain.lecture.dto.comment.CommentUpdateRequestDto;
-import com.sparta.classapi.domain.lecture.service.CommentService;
+import com.sparta.classapi.domain.comment.dto.comment.CommentLeaveRequestDto;
+import com.sparta.classapi.domain.comment.dto.comment.CommentUpdateRequestDto;
+import com.sparta.classapi.domain.comment.service.CommentService;
 import com.sparta.classapi.global.security.UserDetailsImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

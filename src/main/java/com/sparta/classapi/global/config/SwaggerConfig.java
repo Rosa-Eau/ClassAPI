@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 @OpenAPIDefinition(
         info = @Info(title = "Class API 명세서",
-                description = "강의 웹사이트 API",
+                description = "강의 웹사이트 API, 민가람/오진선",
                 version = "v1"))
 @Configuration
 public class SwaggerConfig {

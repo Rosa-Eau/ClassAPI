@@ -1,6 +1,6 @@
-package com.sparta.classapi.domain.lecture.dto.comment;
+package com.sparta.classapi.domain.comment.dto.comment;
 
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

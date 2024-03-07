@@ -1,6 +1,6 @@
 package com.sparta.classapi.domain.user.entity;
 
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import com.sparta.classapi.domain.lecture.entity.like.Like;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

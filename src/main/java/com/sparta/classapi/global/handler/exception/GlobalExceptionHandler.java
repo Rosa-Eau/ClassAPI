@@ -3,9 +3,11 @@ package com.sparta.classapi.global.handler.exception;
 import com.sparta.classapi.global.handler.valid.CustomValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.nio.file.AccessDeniedException;
 
@@ -36,12 +38,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({AccessDeniedException.class})
     public ResponseEntity<RestApiException> accessDeniedExceptionHandler(AccessDeniedException ex) {
-        RestApiException restApiException = new RestApiException(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE.value());
+        RestApiException restApiException = new RestApiException(ex.getMessage(), HttpStatus.FORBIDDEN.value());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
                 // HTTP status code
-                HttpStatus.NOT_ACCEPTABLE
+                HttpStatus.FORBIDDEN
         );
     }
 

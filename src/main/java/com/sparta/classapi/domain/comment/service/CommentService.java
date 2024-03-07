@@ -1,11 +1,11 @@
-package com.sparta.classapi.domain.lecture.service;
+package com.sparta.classapi.domain.comment.service;
 
 
-import com.sparta.classapi.domain.lecture.dto.comment.CommentLeaveRequestDto;
-import com.sparta.classapi.domain.lecture.dto.comment.CommentUpdateRequestDto;
-import com.sparta.classapi.domain.lecture.entity.comment.Comment;
+import com.sparta.classapi.domain.comment.dto.comment.CommentLeaveRequestDto;
+import com.sparta.classapi.domain.comment.dto.comment.CommentUpdateRequestDto;
+import com.sparta.classapi.domain.comment.entity.comment.Comment;
 import com.sparta.classapi.domain.lecture.entity.lecture.Lecture;
-import com.sparta.classapi.domain.lecture.repository.CommentRepository;
+import com.sparta.classapi.domain.comment.repository.CommentRepository;
 import com.sparta.classapi.domain.lecture.repository.LectureRepository;
 import com.sparta.classapi.domain.user.entity.User;
 import com.sparta.classapi.domain.user.repository.UserRepository;
@@ -28,9 +28,9 @@ public class CommentService {
     @Transactional
     public void leaveComment(CommentLeaveRequestDto requestDto, String email) {
 
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("해당 유저를 찾을 수 없습니다."));
 
-        Lecture lecture = lectureRepository.findById(requestDto.getLectureId()).orElseThrow(() -> new IllegalArgumentException("해당 강의를 찾을 수 없습니다."));
+        Lecture lecture = lectureRepository.findById(requestDto.getLectureId()).orElseThrow(() -> new NullPointerException("해당 강의를 찾을 수 없습니다."));
 
         commentRepository.save(requestDto.toEntity(user, lecture));
     }
@@ -38,13 +38,13 @@ public class CommentService {
     @Transactional
     public void updateComment(CommentUpdateRequestDto requestDto, String email, Long commentId) {
 
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("해당 유저를 찾을 수 없습니다."));
 
         if (!commentRepository.existsByLectureIdAndUserId(requestDto.getLectureId(), user.getId())) {
             throw  new IllegalArgumentException("해당 댓글을 등록한 회원만 댓글 수정이 가능합니다.");
         }
 
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글을 찾을 수 없습니다."));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글을 찾을 수 없습니다."));
 
         comment.update(requestDto);
     }
@@ -52,7 +52,7 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId, String email) {
 
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("해당 유저를 찾을 수 없습니다."));
 
         if (!commentRepository.existsByIdAndUserId(commentId, user.getId())) {
             throw  new IllegalArgumentException("해당 댓글을 등록한 회원만 댓글 삭제가 가능합니다.");

@@ -1,4 +1,4 @@
-package com.sparta.classapi.domain.lecture.dto.comment;
+package com.sparta.classapi.domain.comment.dto.comment;
 
 
 import lombok.Getter;
