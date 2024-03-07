@@ -27,6 +27,7 @@ public class LectureController {
         return lectureService.readLecture(lectureId);
     }
 
+    @Tag(name = "readLecture", description = "카테고리별 강의 조희")
     @GetMapping
     public List<LectureListResponseDto> readLectureList(@RequestParam String category, String select, String sort) {
         return lectureService.readLectureList(category, select, sort);
